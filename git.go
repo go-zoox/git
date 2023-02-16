@@ -2,6 +2,7 @@ package git
 
 import "os"
 
+// Git is a git client interface.
 type Git interface {
 	GetHashByBranch(branch string) ([]byte, error)
 	GetHashByTag(tag string) ([]byte, error)
@@ -16,6 +17,7 @@ type git struct {
 	cfg *Config
 }
 
+// Config ...
 type Config struct {
 	Repository string `json:"repository"`
 	//
@@ -27,6 +29,7 @@ type Config struct {
 	IsInsecureSkipTLS bool `json:"is_insecure_skip_tls"`
 }
 
+// New creates a git client.
 func New(cfg *Config) (Git, error) {
 	if cfg.Path == "" {
 		cfg.Path = os.TempDir()

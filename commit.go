@@ -9,6 +9,7 @@ import (
 	"github.com/go-git/go-git/v5/storage/memory"
 )
 
+// Commit is the commit information.
 type Commit struct {
 	Hash        string
 	Message     string
