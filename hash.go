@@ -25,7 +25,7 @@ func (g *git) GetHashByBranch(branch string) ([]byte, error) {
 		}
 	}
 
-	return nil, nil
+	return nil, fmt.Errorf("branch %s not found", branch)
 }
 
 func (g *git) GetHashByTag(tag string) ([]byte, error) {
