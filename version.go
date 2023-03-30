@@ -1,4 +1,4 @@
 package git
 
 // Version is the version of this package
-var Version = "0.0.2"
+var Version = "0.0.3"
