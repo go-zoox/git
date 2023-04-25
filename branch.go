@@ -2,6 +2,7 @@ package git
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/go-zoox/core-utils/array"
 	"github.com/go-zoox/core-utils/regexp"
@@ -27,6 +28,10 @@ func (g *git) ListBranches(keyword string, limit int) ([]string, error) {
 			return regexp.Match(fmt.Sprintf("(?i)%s", keyword), branch)
 		})
 	}
+
+	sort.Slice(branches, func(i, j int) bool {
+		return branches[i] < branches[j]
+	})
 
 	if limit > 0 && len(branches) > limit {
 		branches = branches[:limit]
