@@ -26,6 +26,7 @@ func (g *git) ListBranches(keyword string, limit int, opts ...ListBranchesOption
 	}
 
 	branches := []string{}
+	tags := []string{}
 	for _, ref := range refs {
 		if ref.Name().IsBranch() {
 			branches = append(branches, ref.Name().String()[len("refs/heads/"):])
@@ -33,9 +34,13 @@ func (g *git) ListBranches(keyword string, limit int, opts ...ListBranchesOption
 
 		if cfg.WithTag {
 			if ref.Name().IsTag() {
-				branches = append(branches, ref.Name().String()[len("refs/tags/"):])
+				tags = append(tags, ref.Name().String()[len("refs/tags/"):])
 			}
 		}
+	}
+
+	if cfg.WithTag {
+		branches = append(branches, tags...)
 	}
 
 	if keyword != "" {
