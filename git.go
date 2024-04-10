@@ -12,7 +12,7 @@ type Git interface {
 	CheckoutByBranchAndCommit(branch, commit string) (path []byte, err error)
 	CheckoutByTagAndCommit(tag, commit string) (path []byte, err error)
 	//
-	ListBranches(keyword string, limit int) ([]string, error)
+	ListBranches(keyword string, limit int, opts ...ListBranchesOptions) ([]string, error)
 }
 
 type git struct {

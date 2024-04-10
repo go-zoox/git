@@ -19,3 +19,18 @@ func TestListBranch(t *testing.T) {
 
 	fmt.PrintJSON(branches)
 }
+
+func TestListBranchWithTag(t *testing.T) {
+	g, _ := New(&Config{
+		Repository: "https://github.com/zcorky/zmicro",
+		// Username:   os.Getenv("GIT_USERNAME"),
+		// Password:   os.Getenv("GIT_PASSWORD"),
+	})
+
+	branches, err := g.ListBranches("v1.2", 10, func(lbc *ListBranchesConfig) {
+		lbc.WithTag = true
+	})
+	testify.Assert(t, err == nil, "should not error")
+
+	fmt.PrintJSON(branches)
+}
