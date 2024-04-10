@@ -27,7 +27,7 @@ func TestListBranchWithTag(t *testing.T) {
 		// Password:   os.Getenv("GIT_PASSWORD"),
 	})
 
-	branches, err := g.ListBranches("v1.2", 10, func(lbc *ListBranchesConfig) {
+	branches, err := g.ListBranches("", 10, func(lbc *ListBranchesConfig) {
 		lbc.WithTag = true
 	})
 	testify.Assert(t, err == nil, "should not error")

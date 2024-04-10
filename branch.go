@@ -39,10 +39,6 @@ func (g *git) ListBranches(keyword string, limit int, opts ...ListBranchesOption
 		}
 	}
 
-	if cfg.WithTag {
-		branches = append(branches, tags...)
-	}
-
 	if keyword != "" {
 		branches = array.Filter(branches, func(branch string, index int) bool {
 			return regexp.Match(fmt.Sprintf("(?i)%s", keyword), branch)
@@ -52,6 +48,11 @@ func (g *git) ListBranches(keyword string, limit int, opts ...ListBranchesOption
 	sort.Slice(branches, func(i, j int) bool {
 		return branches[i] < branches[j]
 	})
+
+	// tags end
+	if cfg.WithTag {
+		branches = append(branches, tags...)
+	}
 
 	if limit > 0 && len(branches) > limit {
 		branches = branches[:limit]
